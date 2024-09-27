@@ -7,7 +7,7 @@ import java.util.Date;
 public class Orden {
     private int numOrden;
     private Date fechaOrden;
-    private ArrayList<String> detalleOrden = new ArrayList();
+    private ArrayList<Producto> detalleOrden = new ArrayList();
     private String nombreCliente;
     private double descuento;
     private double total;
@@ -48,11 +48,11 @@ public class Orden {
         this.fechaOrden = fechaOrden;
     }
 
-    public ArrayList<String> getDetalleOrden() {
+    public ArrayList<Producto> getDetalleOrden() {
         return detalleOrden;
     }
 
-    public void setDetalleOrden(ArrayList<String> detalleOrden) {
+    public void setDetalleOrden(ArrayList<Producto> detalleOrden) {
         this.detalleOrden = detalleOrden;
     }
 
