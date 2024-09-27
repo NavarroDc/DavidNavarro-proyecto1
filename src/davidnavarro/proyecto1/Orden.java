@@ -3,7 +3,7 @@ package davidnavarro.proyecto1;
 import java.util.ArrayList;
 import java.util.Date;
 
-//Atributos de la clase Orden
+//Atributoss de la clase Orden
 public class Orden {
     private int numOrden;
     private Date fechaOrden;
