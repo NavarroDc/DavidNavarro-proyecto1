@@ -3,7 +3,7 @@ package davidnavarro.proyecto1;
 import java.util.ArrayList;
 import java.util.Date;
 
-//Atributoss de la clase Orden
+//Atributos de la clase Orden
 public class Orden {
     private int numOrden;
     private Date fechaOrden;
@@ -21,7 +21,8 @@ public class Orden {
         this.descuento = 0.0;
         this.total = 0.0;
     }
-
+    
+    //Constructor con parámetros
     public Orden(int numOrden, Date fechaOrden, String nombreCliente, double descuento, double total) {
         this.numOrden = numOrden;
         this.fechaOrden = fechaOrden;
@@ -30,6 +31,7 @@ public class Orden {
         this.total = total;
     }
 
+    //Getters y setters de la clase orden
     public int getNumOrden() {
         return numOrden;
     }
@@ -77,8 +79,10 @@ public class Orden {
     public void setTotal(double total) {
         this.total = total;
     }
-    
-    
-   
+
+    @Override
+    public String toString() {
+        return "Orden{" + "numOrden=" + numOrden + ", fechaOrden=" + fechaOrden + ", detalleOrden=" + detalleOrden + ", nombreCliente=" + nombreCliente + ", descuento=" + descuento + ", total=" + total + '}';
+    }
 }
 
