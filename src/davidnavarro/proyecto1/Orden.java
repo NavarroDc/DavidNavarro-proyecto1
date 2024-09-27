@@ -31,7 +31,7 @@ public class Orden {
         this.total = total;
     }
 
-    //Getters y setters de la clase orden
+    //Getters y setters de la clase Orden
     public int getNumOrden() {
         return numOrden;
     }
