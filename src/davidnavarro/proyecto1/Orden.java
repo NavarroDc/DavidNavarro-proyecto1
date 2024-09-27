@@ -84,5 +84,45 @@ public class Orden {
     public String toString() {
         return "Orden{" + "numOrden=" + numOrden + ", fechaOrden=" + fechaOrden + ", detalleOrden=" + detalleOrden + ", nombreCliente=" + nombreCliente + ", descuento=" + descuento + ", total=" + total + '}';
     }
+    
+    public void agregarProducto (Producto productoOrden){
+        this.detalleOrden.add(productoOrden);
+    }
+    
+    public double calculoServicio(){
+        
+        double totalProducto = 0.0;
+        
+        for(Producto productoOrd : this.detalleOrden){
+            totalProducto = totalProducto + productoOrd.getPrecioProducto();
+            }
+        return totalProducto * 0.10;
+    }
+    
+    public double calculoIVA(){
+        
+        double totalProducto = 0.0;
+        
+        for(Producto productoOrd : this.detalleOrden){
+            totalProducto = totalProducto + productoOrd.getPrecioProducto();
+            }
+        return totalProducto * 0.13;
+    }
+    
+    public double total(){
+       double montoTotalProductos = 0.0;
+        
+        for(Producto productoOrd : this.detalleOrden){
+            montoTotalProductos = montoTotalProductos + productoOrd.getPrecioProducto();
+            }
+        return montoTotalProductos + this.calculoIVA() + this.calculoServicio();
+    }
+    
+   
+    public double totalFinal(){
+        double totalFinal = this.total() - (this.total() * (this.descuento / 100));
+        
+        return totalFinal;
+    }
 }
 
