@@ -9,7 +9,11 @@ public class DavidNavarroProyecto1 {
         Producto p2 = new Producto("hamburguesa", 600);
         Date fechaNueva = new Date();
         
-        Orden ord = new Orden(1, fechaNueva, "Marcos", 0.05 , 0.0);
+        Orden ord = new Orden(1, fechaNueva, "Marcos", 5 , 0.0);
+        
+        ord.agregarProducto(p1);
+        ord.agregarProducto(p2);
+        ord.imprimirFactura();
         
     }
     

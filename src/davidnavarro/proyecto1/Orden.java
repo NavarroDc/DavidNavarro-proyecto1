@@ -9,7 +9,7 @@ public class Orden {
     private Date fechaOrden;
     private ArrayList<Producto> detalleOrden = new ArrayList();
     private String nombreCliente;
-    private double descuento;
+    private int descuento;
     private double total;
 
     //Constructor sin parámetros
@@ -18,12 +18,12 @@ public class Orden {
         this.numOrden = 0;
         this.fechaOrden = null;
         this.nombreCliente = "";
-        this.descuento = 0.0;
+        this.descuento = 0;
         this.total = 0.0;
     }
     
     //Constructor con parámetros
-    public Orden(int numOrden, Date fechaOrden, String nombreCliente, double descuento, double total) {
+    public Orden(int numOrden, Date fechaOrden, String nombreCliente, int descuento, double total) {
         this.numOrden = numOrden;
         this.fechaOrden = fechaOrden;
         this.nombreCliente = nombreCliente;
@@ -68,7 +68,7 @@ public class Orden {
         return descuento;
     }
 
-    public void setDescuento(double descuento) {
+    public void setDescuento(int descuento) {
         this.descuento = descuento;
     }
 
@@ -118,11 +118,19 @@ public class Orden {
         return montoTotalProductos + this.calculoIVA() + this.calculoServicio();
     }
     
-   
     public double totalFinal(){
         double totalFinal = this.total() - (this.total() * (this.descuento / 100));
         
         return totalFinal;
+    }
+    
+    public void imprimirFactura(){
+        for(Producto verProducto : this.detalleOrden){
+            
+            System.out.println("-" + verProducto.getNombreProducto() + "-" + verProducto.getPrecioProducto());
+            
+           
+        }
     }
 }
 
