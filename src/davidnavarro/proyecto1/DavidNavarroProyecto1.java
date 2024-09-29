@@ -38,7 +38,20 @@ public class DavidNavarroProyecto1 {
             
             switch(seleccionMenu){
                 
-                case 1: System.out.println("Op1");
+                case 1: 
+                    Orden nuevaOrden = new Orden();
+                    Scanner leerDatosProducto = new Scanner (System.in);
+                    
+                    System.out.println("Ingrese el nombre del producto para crearlo");
+                    String nuevoNombreProducto = leerDatosProducto.nextLine();
+                    System.out.println("");
+                    System.out.println("Ingrese el precio del producto");
+                    String precioIngresado = leerDatosProducto.nextLine();
+                    Double nuevoPrecioProducto = Double.parseDouble(precioIngresado);
+                    Producto nuevoProducto = new Producto(nuevoNombreProducto, nuevoPrecioProducto);
+                    nuevaOrden.agregarProducto (nuevoProducto);
+                    
+                 
                 break;
                 
                 case 2: System.out.println("Op2");

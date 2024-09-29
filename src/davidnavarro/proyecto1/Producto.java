@@ -24,7 +24,7 @@ public class Producto {
     }
 
     public double getPrecioProducto() {
-        return precioProducto;
+        return precioProducto; 
     }
 
     public void setPrecioProducto(double precioProducto) {
