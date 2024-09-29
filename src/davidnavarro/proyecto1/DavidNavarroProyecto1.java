@@ -9,6 +9,7 @@ public class DavidNavarroProyecto1 {
 
         Scanner seleccion = new Scanner(System.in);
         boolean opcionCorrecta = false;
+        int seleccionMenu = 0;
 
         do {
             try {
@@ -19,7 +20,7 @@ public class DavidNavarroProyecto1 {
                 System.out.println("3. Ingreso de productos y precios ");
                 System.out.println("4. Reporte final");
 
-                int seleccionMenu = Integer.parseInt(seleccion.nextLine());
+                seleccionMenu = Integer.parseInt(seleccion.nextLine());
 
                 if (seleccionMenu >= 1 && seleccionMenu <= 4) {
 
@@ -33,13 +34,23 @@ public class DavidNavarroProyecto1 {
             } catch (NumberFormatException e){
                 System.out.println("Debe introducir un número en el apartado del menú");
                 
-            } 
+            }
+            
+            switch(seleccionMenu){
                 
+                case 1: System.out.println("Op1");
+                break;
+                
+                case 2: System.out.println("Op2");
+                break;
+                
+                case 3: System.out.println("Op3");
+                break;
+                
+                case 4: System.out.println("Op4");
+                break;
+            }
             }while (opcionCorrecta == false);
-                
-            seleccion.close();
+            seleccion.close();   
         }
-    
-        
-    
     }
