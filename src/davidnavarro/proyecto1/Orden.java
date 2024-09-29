@@ -84,7 +84,7 @@ public class Orden {
     public String toString() {
         return "Orden{" + "numOrden=" + numOrden + ", fechaOrden=" + fechaOrden + ", detalleOrden=" + detalleOrden + ", nombreCliente=" + nombreCliente + ", descuento=" + descuento + ", total=" + total + '}';
     }
-    
+    //------------------------------------------------------------------------------------------------------------------------------------------
     
     public void agregarProducto (Producto productoOrden){
         this.detalleOrden.add(productoOrden);
