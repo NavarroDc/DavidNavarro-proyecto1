@@ -7,17 +7,18 @@ import java.util.Scanner;
 //Atributos de la clase Orden
 public class Orden {
 
-    private int numOrden;
+    
     private Date fechaOrden;
     private ArrayList<Producto> detalleOrden = new ArrayList();
     private String nombreCliente;
+    private String numOrden;
     private int descuento;
     private double total;
 
     //Constructor sin parámetros
     public Orden() {
 
-        this.numOrden = 0;
+        this.numOrden = "";
         this.fechaOrden = null;
         this.nombreCliente = "";
         this.descuento = 0;
@@ -25,7 +26,7 @@ public class Orden {
     }
 
     //Constructor con parámetros
-    public Orden(int numOrden, Date fechaOrden, String nombreCliente, int descuento, double total) {
+    public Orden(String numOrden, Date fechaOrden, String nombreCliente, int descuento, double total) {
         this.numOrden = numOrden;
         this.fechaOrden = fechaOrden;
         this.nombreCliente = nombreCliente;
@@ -34,11 +35,11 @@ public class Orden {
     }
 
     //Getters y setters de la clase Orden
-    public int getNumOrden() {
+    public String getNumOrden() {
         return numOrden;
     }
 
-    public void setNumOrden(int numOrden) {
+    public void setNumOrden(String numOrden) {
         this.numOrden = numOrden;
     }
 
@@ -88,6 +89,14 @@ public class Orden {
     }
     //------------------------------------------------------------------------------------------------------------------------------------------
 
+    public void crearNumOrden(int numOrdenIngresado) {
+        String codigoOrden = "ORD";
+
+        String codigoOrdenFinal = codigoOrden.concat(Integer.toString(numOrdenIngresado));
+
+        this.numOrden = codigoOrdenFinal;
+    }
+    
     public void agregarProducto(Producto productoOrden) {
         this.detalleOrden.add(productoOrden);
     }
