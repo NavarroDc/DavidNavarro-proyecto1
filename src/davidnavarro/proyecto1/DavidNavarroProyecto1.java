@@ -46,24 +46,10 @@ public class DavidNavarroProyecto1 {
 
                 case 1:
                     Scanner leerDatosProducto = new Scanner(System.in);
-                    boolean precioCorrecto = false;
 
-                    System.out.println("Ingrese el nombre del producto para crearlo");
-                    String nuevoNombreProducto = leerDatosProducto.nextLine();
-                    System.out.println("");
-
-                    do {
-                        try {
-                            System.out.println("Ingrese el precio del producto");
-                            String precioIngresado = leerDatosProducto.nextLine();
-                            Double nuevoPrecioProducto = Double.parseDouble(precioIngresado);
-                            Producto nuevoProducto = new Producto(nuevoNombreProducto, nuevoPrecioProducto);
-                            ordenActual.agregarProducto(nuevoProducto);
-                            precioCorrecto = true;
-                        } catch (NumberFormatException e) {
-                            System.out.println("Debe ingresar un número para que el precio sea válido...");
-                        }
-                    } while (precioCorrecto == false);
+                    String nuevoNombreProducto = solicitarNombreProducto(leerDatosProducto);
+                    double nuevoPrecioCorrecto = solicitarPrecioProducto(leerDatosProducto);
+                    int nuevaCantidadProducto = solicitarCantidadProducto(leerDatosProducto);
                     break;
 
                 case 2:
@@ -89,5 +75,54 @@ public class DavidNavarroProyecto1 {
         int nuevoNumOrden = Integer.parseInt(lecturaDatos.nextLine());
 
         ordenActual.crearNumOrden(nuevoNumOrden);
+    }
+
+    public static String solicitarNombreProducto(Scanner leerNombre) {
+
+        System.out.println("Ingrese el nombre del producto para crearlo");
+        String nuevoNombreProducto = leerNombre.nextLine();
+        System.out.println("");
+
+        return nuevoNombreProducto;
+    }
+
+    public static double solicitarPrecioProducto(Scanner leerPrecio) {
+        boolean precioCorrecto = false;
+        double nuevoPrecioProducto = 0.0;
+
+        do {
+            try {
+                System.out.println("Ingrese el precio del producto");
+                String precioIngresado = leerPrecio.nextLine();
+                nuevoPrecioProducto = Double.parseDouble(precioIngresado);
+
+                precioCorrecto = true;
+
+            } catch (NumberFormatException e) {
+                System.out.println("Debe ingresar un número para que el precio sea válido");
+            }
+        } while (!precioCorrecto); //Ejecutarse mientras precioCorrecto esté NEGADO
+
+        return nuevoPrecioProducto;
+    }
+
+    public static int solicitarCantidadProducto(Scanner leerCantidad) {
+        boolean cantidadCorrecta = false;
+        int nuevoCantidadProducto = 0;
+
+        do {
+            try {
+                System.out.println("Ingrese la cantidad del producto");
+                String cantidadIngresada = leerCantidad.nextLine();
+                nuevoCantidadProducto = Integer.parseInt(cantidadIngresada);
+
+                cantidadCorrecta = true;
+
+            } catch (NumberFormatException e) {
+                System.out.println("Debe ingresar un número para que la cantidad sea válida");
+            }
+        } while (!cantidadCorrecta); //Ejecutarse mientras precioCorrecto esté NEGADO
+
+        return nuevoCantidadProducto;
     }
 }
