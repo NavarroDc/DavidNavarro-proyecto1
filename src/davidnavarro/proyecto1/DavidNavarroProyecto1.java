@@ -125,4 +125,14 @@ public class DavidNavarroProyecto1 {
 
         return nuevoCantidadProducto;
     }
+    
+    public static String solicitarNombreCliente(Scanner leerNombreCliente){
+        System.out.println("Ingrese el nombre del cliente");
+        String nuevoNombreCliente = leerNombreCliente.nextLine();
+        System.out.println("");
+
+        return nuevoNombreCliente;
+    }
+    /*public static Date solicitarFecha (Scanner leerFecha){  
+    }*/
 }
