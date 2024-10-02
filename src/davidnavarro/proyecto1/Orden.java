@@ -9,7 +9,7 @@ public class Orden {
 
     
     private Date fechaOrden;
-    private ArrayList<Producto> detalleOrden = new ArrayList();
+    private ArrayList<Producto> detalleOrden = new ArrayList();//Productos de una orden en específico con sus atributos
     private String nombreCliente;
     private String numOrden;
     private int descuento;

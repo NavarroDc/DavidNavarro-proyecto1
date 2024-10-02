@@ -1,7 +1,10 @@
 package davidnavarro.proyecto1;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class DavidNavarroProyecto1 {
@@ -41,19 +44,23 @@ public class DavidNavarroProyecto1 {
             } catch (NumberFormatException e) {
                 System.out.println("Debe introducir un número en el apartado del menú");
             }
-
+            Scanner leerDatosProducto = new Scanner(System.in);
             switch (seleccionMenu) {
 
                 case 1:
-                    Scanner leerDatosProducto = new Scanner(System.in);
 
                     String nuevoNombreProducto = solicitarNombreProducto(leerDatosProducto);
                     double nuevoPrecioCorrecto = solicitarPrecioProducto(leerDatosProducto);
                     int nuevaCantidadProducto = solicitarCantidadProducto(leerDatosProducto);
+                    Producto productoCreado = new Producto(nuevoNombreProducto, nuevoPrecioCorrecto, nuevaCantidadProducto);
+                    ordenActual.agregarProducto(productoCreado);
                     break;
 
                 case 2:
-                    System.out.println("Op2");
+                    solicitarNumOrden();
+                    Date nuevaFecha = solicitarFecha(leerDatosProducto);
+                    //El detalle de la orden se asignó en la opción 1 
+                    String nuevoNombreCliente = solicitarNombreCliente(leerDatosProducto);
                     break;
 
                 case 3:
@@ -125,14 +132,38 @@ public class DavidNavarroProyecto1 {
 
         return nuevoCantidadProducto;
     }
-    
-    public static String solicitarNombreCliente(Scanner leerNombreCliente){
+
+    public static Date solicitarFecha(Scanner leerFecha) {
+        boolean fechaValida = false;
+        System.out.println("Ingrese la fecha en la que crea la orden (Debe escribir en este formato día/mes/año)...");
+        Date nuevaFecha = null;
+
+        do {
+            String fechaIngresada = leerFecha.nextLine();
+
+            SimpleDateFormat fechaFormateada = new SimpleDateFormat("dd/MMM/yyyy", Locale.forLanguageTag("es-ES"));
+            fechaFormateada.setLenient(false);
+
+            try {
+                nuevaFecha = fechaFormateada.parse(fechaIngresada);
+                fechaValida = true;
+            } catch (ParseException errorParse) {
+                System.out.println(errorParse);
+                System.out.println("La fecha es inválida, debe seguir el formato dd/mmm/aaaa");
+            }
+        } while (!fechaValida);
+
+        return nuevaFecha;
+    }
+
+    public static String solicitarNombreCliente(Scanner leerNombreCliente) {
         System.out.println("Ingrese el nombre del cliente");
         String nuevoNombreCliente = leerNombreCliente.nextLine();
         System.out.println("");
 
         return nuevoNombreCliente;
     }
-    /*public static Date solicitarFecha (Scanner leerFecha){  
-    }*/
+    
+    
+
 }
