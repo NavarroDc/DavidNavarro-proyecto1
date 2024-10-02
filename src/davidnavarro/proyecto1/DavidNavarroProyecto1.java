@@ -140,7 +140,8 @@ public class DavidNavarroProyecto1 {
 
     public static Date solicitarFecha(Scanner leerFecha) {
         boolean fechaValida = false;
-        System.out.println("Ingrese la fecha en la que crea la orden (Debe escribir en este formato día/mes/año)...");
+        System.out.println("Ingrese la fecha en la que crea la orden (Debe escribir en este formato dd/MMM/aaa) Por ejemplo: 2/feb/2024...");
+        
         Date nuevaFecha = null;
 
         do {
@@ -153,8 +154,8 @@ public class DavidNavarroProyecto1 {
                 nuevaFecha = fechaFormateada.parse(fechaIngresada);
                 fechaValida = true;
             } catch (ParseException errorParse) {
-                System.out.println(errorParse);
-                System.out.println("La fecha es inválida, debe seguir el formato dd/mmm/aaaa");
+                //System.out.println(errorParse);
+                System.out.println("La fecha es inválida, debe seguir el formato dd/MMM/aaaa");
             }
         } while (!fechaValida);
 
@@ -191,7 +192,6 @@ public class DavidNavarroProyecto1 {
             }
 
         } while (!descuentoCorrecto);
-
         return 0;
     }
 }
