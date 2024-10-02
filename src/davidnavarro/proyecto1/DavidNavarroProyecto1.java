@@ -61,6 +61,9 @@ public class DavidNavarroProyecto1 {
                     Date nuevaFecha = solicitarFecha(leerDatosProducto);
                     //El detalle de la orden se asignó en la opción 1 
                     String nuevoNombreCliente = solicitarNombreCliente(leerDatosProducto);
+                    
+                    ordenActual.setFechaOrden(nuevaFecha);
+                    ordenActual.setNombreCliente(nuevoNombreCliente);
                     break;
 
                 case 3:
@@ -164,6 +167,30 @@ public class DavidNavarroProyecto1 {
         return nuevoNombreCliente;
     }
     
-    
+    public static int solicitarDescuento (Scanner leerDescuento){
+        boolean descuentoCorrecto = false;
+        String nuevoDescuento;
+        
+        do{
+            System.out.println("Ingrese el cógido de descuento: DSC5 = 5% / DSC10 = 10% / DSC15 = 15% / 0 = No se aplica descuento");
+            String descuentoIngresado = leerDescuento.nextLine();
+            nuevoDescuento = descuentoIngresado.toUpperCase();
+            
+            if(nuevoDescuento.equals("DSC5")){
+                return 5;
+            }else if (nuevoDescuento.equals("DSC10")){
+                return 10;
+            }else if (nuevoDescuento.equals("DSC15")){
+                return 15;
+            }else if (nuevoDescuento.equals("0")){
+                return 0;
+            }else{
+                System.out.println("No ingresó un descuento válido...");
+            }
+                
+        }while(!descuentoCorrecto);
+        
+        return 0;
+    }
 
 }

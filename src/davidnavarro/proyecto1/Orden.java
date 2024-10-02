@@ -7,7 +7,6 @@ import java.util.Scanner;
 //Atributos de la clase Orden
 public class Orden {
 
-    
     private Date fechaOrden;
     private ArrayList<Producto> detalleOrden = new ArrayList();//Productos de una orden en específico con sus atributos
     private String nombreCliente;
@@ -96,7 +95,7 @@ public class Orden {
 
         this.numOrden = codigoOrdenFinal;
     }
-    
+
     public void agregarProducto(Producto productoOrden) {
         this.detalleOrden.add(productoOrden);
     }

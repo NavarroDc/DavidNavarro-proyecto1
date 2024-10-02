@@ -1,15 +1,15 @@
 package davidnavarro.proyecto1;
 
 public class Producto {
-    
+
     private String nombreProducto;
     private double precioProducto;
     private int cantidadProducto;
 
     public Producto() {
-       this.nombreProducto = "";
-       this.precioProducto = 0.0;
-       this.cantidadProducto = 0;
+        this.nombreProducto = "";
+        this.precioProducto = 0.0;
+        this.cantidadProducto = 0;
     }
 
     public Producto(String nombreProducto, double precioProducto, int cantidadProducto) {
@@ -42,6 +42,5 @@ public class Producto {
         this.cantidadProducto = cantidadProducto;
     }
 
-     
 }
 //Añadir atributo cantidad a Producto
