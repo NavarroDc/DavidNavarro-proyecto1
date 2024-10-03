@@ -68,10 +68,12 @@ public class DavidNavarroProyecto1 {
                     //El detalle de la orden se asignó en la opción 1 
                     String nuevoNombreCliente = solicitarNombreCliente(leerDatosProducto);
                     int descuentoAplicado = solicitarDescuento(leerDatosProducto);
+                    double totalFinalProductos = ordenActual.totalFinal();
 
                     ordenActual.setFechaOrden(nuevaFecha);
                     ordenActual.setNombreCliente(nuevoNombreCliente);
                     ordenActual.setDescuento(descuentoAplicado);
+                    ordenActual.setTotal(totalFinalProductos);
 
                     break;
 
@@ -211,6 +213,7 @@ public class DavidNavarroProyecto1 {
     public static void mostrarDatos() {
         ordenes.add(ordenActual);
         System.out.println(ordenes);
+        imprimirFactura();
     }
 
     public static boolean validarSoN(String eleccion) {
@@ -252,5 +255,13 @@ public class DavidNavarroProyecto1 {
         }
 
         return continuar;
+    }
+    
+    public static void imprimirFactura() {
+        for (Producto verProducto : ordenActual.getDetalleOrden()) {
+
+            System.out.println("-" + verProducto.getNombreProducto() + "-" + verProducto.getPrecioProducto() + "-" + verProducto.getCantidadProducto());
+
+        }
     }
 }

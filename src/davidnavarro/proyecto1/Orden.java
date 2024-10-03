@@ -100,51 +100,63 @@ public class Orden {
     public void agregarProducto(Producto productoOrden) {
         this.detalleOrden.add(productoOrden);
     }
+    
+    public double productoCantidadPrecio(){
+        
+        double precioCantidad = 0.0;
+        
+        for(Producto productoOrd : this.detalleOrden){
+            
+            precioCantidad = precioCantidad + productoOrd.getPrecioProducto() * productoOrd.getCantidadProducto();
+        }
+        return precioCantidad;
+    }
 
     public double calculoServicio() {
 
         double totalProducto = 0.0;
-
-        for (Producto productoOrd : this.detalleOrden) {
-            totalProducto = totalProducto + productoOrd.getPrecioProducto();
-        }
-        return totalProducto * 0.10;
+        
+            totalProducto = productoCantidadPrecio() * 0.10;
+            
+        return totalProducto;
     }
 
     public double calculoIVA() {
 
         double totalProducto = 0.0;
-
-        for (Producto productoOrd : this.detalleOrden) {
-            totalProducto = totalProducto + productoOrd.getPrecioProducto();
-        }
-        return totalProducto * 0.13;
+        
+            totalProducto = productoCantidadPrecio() * 0.13;
+            
+        return totalProducto;
     }
 
-    public double total() {
+    public double primerTotal() {
         double montoTotalProductos = 0.0;
 
         for (Producto productoOrd : this.detalleOrden) {
-            montoTotalProductos = montoTotalProductos + productoOrd.getPrecioProducto();
+            montoTotalProductos = productoCantidadPrecio();
         }
         return montoTotalProductos + this.calculoIVA() + this.calculoServicio();
     }
 
     public double totalFinal() {
        
-        double totalFinal = this.total() - (this.total() * (this.descuento / 100));
+        double totalFinal = this.primerTotal() - (this.primerTotal() * (this.descuento / 100));
+        
 
         return totalFinal;
     }
+    
+    
 
     //Mostrar datos debe ir en el main
-    public void imprimirFactura() {
+    /*public void imprimirFactura() {
         for (Producto verProducto : this.detalleOrden) {
 
             System.out.println("-" + verProducto.getNombreProducto() + "-" + verProducto.getPrecioProducto());
 
         }
-    }
+    }*/
     
    
 }
