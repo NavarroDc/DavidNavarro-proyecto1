@@ -8,19 +8,22 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class DavidNavarroProyecto1 {
-
+    static boolean volverMenuPrincipal = false;
     static ArrayList<Orden> ordenes = new ArrayList();
     static Orden ordenActual = new Orden();
+    
 
     public static void main(String[] args) {
 
         menuPrincipal();
 
     }
+    
 
     public static void menuPrincipal() {
         Scanner seleccion = new Scanner(System.in);
         boolean opcionCorrecta = false;
+        boolean continuarOrden = false;
         int seleccionMenu = 0;
 
         do {
@@ -48,12 +51,15 @@ public class DavidNavarroProyecto1 {
             switch (seleccionMenu) {
 
                 case 1:
+                    do {
+                        String nuevoNombreProducto = solicitarNombreProducto(leerDatosProducto);
+                        double nuevoPrecioCorrecto = solicitarPrecioProducto(leerDatosProducto);
+                        int nuevaCantidadProducto = solicitarCantidadProducto(leerDatosProducto);
+                        Producto productoCreado = new Producto(nuevoNombreProducto, nuevoPrecioCorrecto, nuevaCantidadProducto);
+                        ordenActual.agregarProducto(productoCreado);
+                        continuarOrden = ingresarOtraOrden(leerDatosProducto);
 
-                    String nuevoNombreProducto = solicitarNombreProducto(leerDatosProducto);
-                    double nuevoPrecioCorrecto = solicitarPrecioProducto(leerDatosProducto);
-                    int nuevaCantidadProducto = solicitarCantidadProducto(leerDatosProducto);
-                    Producto productoCreado = new Producto(nuevoNombreProducto, nuevoPrecioCorrecto, nuevaCantidadProducto);
-                    ordenActual.agregarProducto(productoCreado);
+                    } while (continuarOrden);
                     break;
 
                 case 2:
@@ -66,17 +72,18 @@ public class DavidNavarroProyecto1 {
                     ordenActual.setFechaOrden(nuevaFecha);
                     ordenActual.setNombreCliente(nuevoNombreCliente);
                     ordenActual.setDescuento(descuentoAplicado);
+
                     break;
 
                 case 3:
-                    System.out.println("Op3");
+                    mostrarDatos();
                     break;
 
                 case 4:
                     System.out.println("Op4");
                     break;
             }
-        } while (opcionCorrecta == false);
+        } while (opcionCorrecta == false || volverMenuPrincipal == true);
         seleccion.close();
     }
 
@@ -141,7 +148,7 @@ public class DavidNavarroProyecto1 {
     public static Date solicitarFecha(Scanner leerFecha) {
         boolean fechaValida = false;
         System.out.println("Ingrese la fecha en la que crea la orden (Debe escribir en este formato dd/MMM/aaa) Por ejemplo: 2/feb/2024...");
-        
+
         Date nuevaFecha = null;
 
         do {
@@ -173,6 +180,7 @@ public class DavidNavarroProyecto1 {
     public static int solicitarDescuento(Scanner leerDescuento) {
         boolean descuentoCorrecto = false;
         String nuevoDescuento;
+        int descuentoAplicado = 0;
 
         do {
             System.out.println("Ingrese el cógido de descuento: DSC5 = 5% / DSC10 = 10% / DSC15 = 15% / 0 = No se aplica descuento");
@@ -180,18 +188,69 @@ public class DavidNavarroProyecto1 {
             nuevoDescuento = descuentoIngresado.toUpperCase();
 
             if (nuevoDescuento.equals("DSC5")) {
-                return 5;
+                descuentoCorrecto = true;
+                descuentoAplicado = 5;
             } else if (nuevoDescuento.equals("DSC10")) {
-                return 10;
+                descuentoCorrecto = true;
+                descuentoAplicado = 10;
             } else if (nuevoDescuento.equals("DSC15")) {
-                return 15;
+                descuentoCorrecto = true;
+                descuentoAplicado = 15;
             } else if (nuevoDescuento.equals("0")) {
-                return 0;
+                descuentoCorrecto = true;
+                descuentoAplicado = 0;
             } else {
                 System.out.println("No ingresó un descuento válido...");
             }
 
         } while (!descuentoCorrecto);
-        return 0;
+
+        return descuentoAplicado;
+    }
+
+    public static void mostrarDatos() {
+        ordenes.add(ordenActual);
+        System.out.println(ordenes);
+    }
+
+    public static boolean validarSoN(String eleccion) {
+        boolean eleccionCorrecta = true;
+
+        if (!eleccion.equals("S") && !eleccion.equals("N")) {
+            eleccionCorrecta = false;
+            System.out.println("Debe ingresar solo S o N");
+        } else {
+            eleccionCorrecta = true;
+
+        }
+        return eleccionCorrecta;
+    }
+
+    public static boolean ingresarOtraOrden(Scanner leerContinuar) {
+        boolean respuestaValida = false;
+        boolean continuar = false;
+        String respuestaSN = "";
+
+        do {
+            System.out.println("¿Desea ingresar otra orden?");
+            String desicionAgregar = leerContinuar.nextLine();
+            respuestaSN = desicionAgregar.toUpperCase();
+
+            respuestaValida = validarSoN(respuestaSN);
+        } while (!respuestaValida);
+
+        if (respuestaValida == true) {
+            
+            if(respuestaSN.equals("S")){
+                continuar = true;
+            }else{
+                continuar = false;
+                volverMenuPrincipal = true;
+            }
+        }else{
+            System.out.println("Solo se permite escribir S o N");
+        }
+
+        return continuar;
     }
 }

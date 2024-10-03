@@ -1,5 +1,6 @@
 package davidnavarro.proyecto1;
 
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -130,6 +131,7 @@ public class Orden {
     }
 
     public double totalFinal() {
+       
         double totalFinal = this.total() - (this.total() * (this.descuento / 100));
 
         return totalFinal;
@@ -143,4 +145,6 @@ public class Orden {
 
         }
     }
+    
+   
 }
