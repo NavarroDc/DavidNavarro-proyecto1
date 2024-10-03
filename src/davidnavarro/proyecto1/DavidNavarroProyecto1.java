@@ -32,7 +32,7 @@ public class DavidNavarroProyecto1 {
                 System.out.println("");
                 System.out.println("1. Creación de productos");
                 System.out.println("2. Toma de órdenes");
-                System.out.println("3. Ingreso de productos y precios ");
+                System.out.println("3. Mostrar datos de la orden ");
                 System.out.println("4. Reporte final");
 
                 seleccionMenu = Integer.parseInt(seleccion.nextLine());
