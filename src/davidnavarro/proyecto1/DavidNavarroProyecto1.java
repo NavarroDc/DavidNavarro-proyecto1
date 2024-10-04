@@ -12,22 +12,24 @@ public class DavidNavarroProyecto1 {
     static ArrayList<Orden> ordenes = new ArrayList();
     static Orden ordenActual = new Orden();
     
-
     public static void main(String[] args) {
 
         menuPrincipal();
 
     }
     
-
     public static void menuPrincipal() {
         Scanner seleccion = new Scanner(System.in);
         boolean opcionCorrecta = false;
         boolean continuarOrden = false;
+        boolean salir = false;
         int seleccionMenu = 0;
 
         do {
             try {
+                System.out.println("");
+                System.out.println("----------------------------------------------------------------------");
+                System.out.println("----------------------------------------------------------------------");
                 System.out.println("Opciones del restaurante, elija una opción:");
                 System.out.println("");
                 System.out.println("1. Creación de productos");
@@ -41,11 +43,18 @@ public class DavidNavarroProyecto1 {
 
                     opcionCorrecta = true;
                 } else {
+                    System.out.println("----------------------------------------------------------------------");
                     System.out.println("Debe ingresar un número del 1 al 4");
+                    System.out.println("----------------------------------------------------------------------");
+                    System.out.println("");
                     opcionCorrecta = false;
                 }
             } catch (NumberFormatException e) {
+                System.out.println("----------------------------------------------------------------------");
                 System.out.println("Debe introducir un número en el apartado del menú");
+                System.out.println("----------------------------------------------------------------------");
+                System.out.println("");
+
             }
             Scanner leerDatosProducto = new Scanner(System.in);
             switch (seleccionMenu) {
@@ -82,16 +91,18 @@ public class DavidNavarroProyecto1 {
                     break;
 
                 case 4:
-                    System.out.println("Op4");
+                    salir = true;
+                    System.out.println("Saliendo del programa...");
                     break;
             }
-        } while (opcionCorrecta == false || volverMenuPrincipal == true);
+        } while (opcionCorrecta == false || volverMenuPrincipal == true || salir != true);
         seleccion.close();
     }
 
     public static void solicitarNumOrden() {
         Scanner lecturaDatos = new Scanner(System.in);
-
+        System.out.println("");
+        System.out.println("----------------------------------------------------------------------");
         System.out.println("Escriba el número de la orden");
         int nuevoNumOrden = Integer.parseInt(lecturaDatos.nextLine());
 
@@ -99,7 +110,8 @@ public class DavidNavarroProyecto1 {
     }
 
     public static String solicitarNombreProducto(Scanner leerNombre) {
-
+        System.out.println("");
+        System.out.println("----------------------------------------------------------------------");
         System.out.println("Ingrese el nombre del producto para crearlo");
         String nuevoNombreProducto = leerNombre.nextLine();
         System.out.println("");
@@ -120,7 +132,12 @@ public class DavidNavarroProyecto1 {
                 precioCorrecto = true;
 
             } catch (NumberFormatException e) {
+                System.out.println("----------------------------------------------------------------------");
                 System.out.println("Debe ingresar un número para que el precio sea válido");
+                System.out.println("----------------------------------------------------------------------");
+                System.out.println("");
+
+
             }
         } while (!precioCorrecto); //Ejecutarse mientras precioCorrecto esté NEGADO
 
@@ -133,6 +150,7 @@ public class DavidNavarroProyecto1 {
 
         do {
             try {
+                System.out.println("");
                 System.out.println("Ingrese la cantidad del producto");
                 String cantidadIngresada = leerCantidad.nextLine();
                 nuevoCantidadProducto = Integer.parseInt(cantidadIngresada);
@@ -140,7 +158,10 @@ public class DavidNavarroProyecto1 {
                 cantidadCorrecta = true;
 
             } catch (NumberFormatException e) {
+                System.out.println("----------------------------------------------------------------------");
                 System.out.println("Debe ingresar un número para que la cantidad sea válida");
+                System.out.println("----------------------------------------------------------------------");
+                System.out.println("");
             }
         } while (!cantidadCorrecta); //Ejecutarse mientras precioCorrecto esté NEGADO
 
@@ -149,6 +170,7 @@ public class DavidNavarroProyecto1 {
 
     public static Date solicitarFecha(Scanner leerFecha) {
         boolean fechaValida = false;
+        System.out.println("");
         System.out.println("Ingrese la fecha en la que crea la orden (Debe escribir en este formato dd/MMM/aaa) Por ejemplo: 2/feb/2024...");
 
         Date nuevaFecha = null;
@@ -164,7 +186,11 @@ public class DavidNavarroProyecto1 {
                 fechaValida = true;
             } catch (ParseException errorParse) {
                 //System.out.println(errorParse);
+                System.out.println("");
+                System.out.println("----------------------------------------------------------------------");
                 System.out.println("La fecha es inválida, debe seguir el formato dd/MMM/aaaa");
+                System.out.println("----------------------------------------------------------------------");
+                System.out.println("");
             }
         } while (!fechaValida);
 
@@ -172,6 +198,7 @@ public class DavidNavarroProyecto1 {
     }
 
     public static String solicitarNombreCliente(Scanner leerNombreCliente) {
+        System.out.println("");
         System.out.println("Ingrese el nombre del cliente");
         String nuevoNombreCliente = leerNombreCliente.nextLine();
         System.out.println("");
@@ -202,7 +229,11 @@ public class DavidNavarroProyecto1 {
                 descuentoCorrecto = true;
                 descuentoAplicado = 0;
             } else {
+                System.out.println("");
+                System.out.println("----------------------------------------------------------------------");
                 System.out.println("No ingresó un descuento válido...");
+                System.out.println("----------------------------------------------------------------------");
+                System.out.println("");
             }
 
         } while (!descuentoCorrecto);
@@ -221,7 +252,12 @@ public class DavidNavarroProyecto1 {
 
         if (!eleccion.equals("S") && !eleccion.equals("N")) {
             eleccionCorrecta = false;
+            System.out.println("----------------------------------------------------------------------");
             System.out.println("Debe ingresar solo S o N");
+            System.out.println("----------------------------------------------------------------------");
+            System.out.println("");
+
+
         } else {
             eleccionCorrecta = true;
 
@@ -235,6 +271,8 @@ public class DavidNavarroProyecto1 {
         String respuestaSN = "";
 
         do {
+            System.out.println("");
+            System.out.println("----------------------------------------------------------------------");
             System.out.println("¿Desea ingresar otra orden?");
             String desicionAgregar = leerContinuar.nextLine();
             respuestaSN = desicionAgregar.toUpperCase();
@@ -259,9 +297,13 @@ public class DavidNavarroProyecto1 {
     
     public static void imprimirFactura() {
         for (Producto verProducto : ordenActual.getDetalleOrden()) {
-
-            System.out.println("-" + verProducto.getNombreProducto() + "-" + verProducto.getPrecioProducto() + "-" + verProducto.getCantidadProducto());
-
+            System.out.println("");
+            System.out.println("");
+            System.out.println("----------------------------------------------------------------------");
+            System.out.println("Detalle de la orden");
+            System.out.println("Porducto: " + verProducto.getNombreProducto());
+            System.out.println("Precio: " + verProducto.getPrecioProducto());
+            System.out.println("Cantidad del producto: " + verProducto.getCantidadProducto());
         }
     }
 }

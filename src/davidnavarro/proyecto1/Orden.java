@@ -85,7 +85,7 @@ public class Orden {
 
     @Override
     public String toString() {
-        return "Orden{" + "numOrden=" + numOrden + ", fechaOrden=" + fechaOrden + ", detalleOrden=" + detalleOrden + ", nombreCliente=" + nombreCliente + ", descuento=" + descuento + ", total=" + total + '}';
+        return "\n"+"\n"+"\n Reporte de la orden\n" + "\n Número de orden: " + numOrden + "\n Fecha de la orden: " + fechaOrden + "\n Nombre del cliente: " + nombreCliente + "\n Descuento: " + descuento + "\n Total de la compra: " + total;
     }
     //------------------------------------------------------------------------------------------------------------------------------------------
 
