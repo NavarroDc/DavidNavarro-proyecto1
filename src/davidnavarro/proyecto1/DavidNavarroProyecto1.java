@@ -8,20 +8,22 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class DavidNavarroProyecto1 {
+
     static boolean volverMenuPrincipal = false;
     static ArrayList<Orden> ordenes = new ArrayList();
     static Orden ordenActual = new Orden();
-    
+
     public static void main(String[] args) {
 
         menuPrincipal();
 
     }
-    
+
     public static void menuPrincipal() {
         Scanner seleccion = new Scanner(System.in);
         boolean opcionCorrecta = false;
         boolean continuarOrden = false;
+        //boolean continuarAgregarNum = false;
         boolean salir = false;
         int seleccionMenu = 0;
 
@@ -34,8 +36,9 @@ public class DavidNavarroProyecto1 {
                 System.out.println("");
                 System.out.println("1. Creación de productos");
                 System.out.println("2. Toma de órdenes");
-                System.out.println("3. Reporte final ");
-                System.out.println("4. Salir");
+                System.out.println("3. Ingresar otra orden");
+                System.out.println("4. Reporte final ");
+                System.out.println("5. Salir");
 
                 seleccionMenu = Integer.parseInt(seleccion.nextLine());
 
@@ -66,12 +69,13 @@ public class DavidNavarroProyecto1 {
                         int nuevaCantidadProducto = solicitarCantidadProducto(leerDatosProducto);
                         Producto productoCreado = new Producto(nuevoNombreProducto, nuevoPrecioCorrecto, nuevaCantidadProducto);
                         ordenActual.agregarProducto(productoCreado);
-                        continuarOrden = ingresarOtraOrden(leerDatosProducto);
+                        continuarOrden = ingresarOtroProducto(leerDatosProducto);
 
                     } while (continuarOrden);
                     break;
 
                 case 2:
+
                     solicitarNumOrden();
                     Date nuevaFecha = solicitarFecha(leerDatosProducto);
                     //El detalle de la orden se asignó en la opción 1 
@@ -87,26 +91,65 @@ public class DavidNavarroProyecto1 {
                     break;
 
                 case 3:
-                    mostrarDatos();
+                    preguntarNuevaOrden();
                     break;
 
                 case 4:
+                    mostrarDatos();
+                    break;
+
+                case 5:
                     salir = true;
                     System.out.println("Saliendo del programa...");
                     break;
             }
-        } while (opcionCorrecta == false || volverMenuPrincipal == true || salir != true);
+            if (salir) {
+                break;
+            }
+
+        } while (!opcionCorrecta || volverMenuPrincipal || !salir);
         seleccion.close();
     }
 
     public static void solicitarNumOrden() {
+        boolean numeroValido = false;
         Scanner lecturaDatos = new Scanner(System.in);
-        System.out.println("");
-        System.out.println("----------------------------------------------------------------------");
-        System.out.println("Escriba el número de la orden");
-        int nuevoNumOrden = Integer.parseInt(lecturaDatos.nextLine());
 
-        ordenActual.crearNumOrden(nuevoNumOrden);
+        do {
+            try {
+                System.out.println("");
+                System.out.println("----------------------------------------------------------------------");
+                System.out.println("Escriba el número de la orden");
+                int nuevoNumOrden = Integer.parseInt(lecturaDatos.nextLine());
+                ordenActual.crearNumOrden(nuevoNumOrden);
+                numeroValido = true;
+
+            } catch (NumberFormatException e) {
+                System.out.println("");
+                System.out.println("----------------------------------------------------------------------");
+                System.out.println("Error, debe introducir un número para continuar");
+                System.out.println("----------------------------------------------------------------------");
+                System.out.println("");
+            }
+        } while (!numeroValido);
+    }
+
+    public static void preguntarNuevaOrden() {
+        Scanner leerOrdenNueva = new Scanner(System.in);
+        String nuevaOrden = "";
+        System.out.println("¿Desea agregar otra orden? S/N");
+        nuevaOrden = leerOrdenNueva.nextLine();
+        nuevaOrden = nuevaOrden.toUpperCase();
+        boolean eleccionValida = validarSoN(nuevaOrden);
+
+        if (eleccionValida) {
+
+            ordenes.add(ordenActual);
+            System.out.println("Tamaño");
+            System.out.println(ordenes.size());
+
+            ordenActual = new Orden();
+        }
     }
 
     public static String solicitarNombreProducto(Scanner leerNombre) {
@@ -136,7 +179,6 @@ public class DavidNavarroProyecto1 {
                 System.out.println("Debe ingresar un número para que el precio sea válido");
                 System.out.println("----------------------------------------------------------------------");
                 System.out.println("");
-
 
             }
         } while (!precioCorrecto); //Ejecutarse mientras precioCorrecto esté NEGADO
@@ -242,9 +284,10 @@ public class DavidNavarroProyecto1 {
     }
 
     public static void mostrarDatos() {
-        ordenes.add(ordenActual);
-        System.out.println(ordenes);
-        imprimirFactura();
+
+        for (Orden orden : ordenes) {
+            System.out.println(orden.toString());
+        }
     }
 
     public static boolean validarSoN(String eleccion) {
@@ -257,7 +300,6 @@ public class DavidNavarroProyecto1 {
             System.out.println("----------------------------------------------------------------------");
             System.out.println("");
 
-
         } else {
             eleccionCorrecta = true;
 
@@ -265,7 +307,7 @@ public class DavidNavarroProyecto1 {
         return eleccionCorrecta;
     }
 
-    public static boolean ingresarOtraOrden(Scanner leerContinuar) {
+    public static boolean ingresarOtroProducto(Scanner leerContinuar) {
         boolean respuestaValida = false;
         boolean continuar = false;
         String respuestaSN = "";
@@ -273,37 +315,26 @@ public class DavidNavarroProyecto1 {
         do {
             System.out.println("");
             System.out.println("----------------------------------------------------------------------");
-            System.out.println("¿Desea ingresar otra orden?");
+            System.out.println("¿Desea ingresar otro producto? S/N");
             String desicionAgregar = leerContinuar.nextLine();
             respuestaSN = desicionAgregar.toUpperCase();
 
             respuestaValida = validarSoN(respuestaSN);
         } while (!respuestaValida);
 
-        if (respuestaValida == true) {
-            
-            if(respuestaSN.equals("S")){
+        if (respuestaValida) {
+
+            if (respuestaSN.equals("S")) {
                 continuar = true;
-            }else{
+            } else {
                 continuar = false;
                 volverMenuPrincipal = true;
             }
-        }else{
+        } else {
             System.out.println("Solo se permite escribir S o N");
         }
 
         return continuar;
     }
-    
-    public static void imprimirFactura() {
-        for (Producto verProducto : ordenActual.getDetalleOrden()) {
-            System.out.println("");
-            System.out.println("");
-            System.out.println("----------------------------------------------------------------------");
-            System.out.println("Detalle de la orden");
-            System.out.println("Porducto: " + verProducto.getNombreProducto());
-            System.out.println("Precio: " + verProducto.getPrecioProducto());
-            System.out.println("Cantidad del producto: " + verProducto.getCantidadProducto());
-        }
-    }
+
 }

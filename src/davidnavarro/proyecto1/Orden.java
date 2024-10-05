@@ -83,9 +83,50 @@ public class Orden {
         this.total = total;
     }
 
+    
     @Override
     public String toString() {
-        return "\n"+"\n"+"\n Reporte de la orden\n" + "\n Número de orden: " + numOrden + "\n Fecha de la orden: " + fechaOrden + "\n Nombre del cliente: " + nombreCliente + "\n Descuento: " + descuento + "\n Total de la compra: " + total;
+        //return "\n"+"\n"+"\n Reporte de la orden\n" + "\n Número de orden: " + numOrden + "\n Fecha de la orden: " + fechaOrden + "\n Nombre del cliente: " + nombreCliente + "\n Descuento: " + descuento + "\n Total de la compra: " + total;
+                  
+        String factura = "";
+        
+        factura += "-----------------------------------------------------\n";
+        factura += "Número de orden: " + this.getNumOrden() + "\n";
+        factura += "Fecha de la orden:   " + this.getFechaOrden() + "\n";
+        factura += "Nombre del cliente:   " + this.getNombreCliente() + "\n";
+        factura += "Productos:\n";
+        for(Producto productoRecorrido : this.detalleOrden){
+            
+            factura += productoRecorrido.mostrarProducto();
+        }
+        factura += "Cálculo del servicio (10%): " + this.calculoServicio();
+        factura += "Cálculo del IVA (13%): " + this.calculoIVA();
+        factura += "Descuento: " + this.getDescuento();
+        factura += "Subtotal: " + this.primerTotal();
+        factura += "Subtotal: " + this.getTotal();
+        factura += "-----------------------------------------------------\n";
+
+        
+        /* ----------------------------------------------------
+        
+            Numero de orden: ORD002
+            Cliente:    Juan
+            Fecha:     15 abr 2024
+
+            Productos:
+
+            5 x Donas:            $1500
+            1 x Refresco:         $100
+            1 x pizza:            $600
+
+            Impuesto de servicio (10%):   $600
+            Impuesto de I.V.A (13%):      $300
+            SubTotal: $2200
+
+            Total = $3100 
+            ----------------------------------------------------*/
+    
+        return factura;
     }
     //------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -107,7 +148,7 @@ public class Orden {
         
         for(Producto productoOrd : this.detalleOrden){
             
-            precioCantidad = precioCantidad + productoOrd.getPrecioProducto() * productoOrd.getCantidadProducto();
+            precioCantidad = precioCantidad + (productoOrd.getPrecioProducto() * productoOrd.getCantidadProducto());
         }
         return precioCantidad;
     }
@@ -146,17 +187,4 @@ public class Orden {
 
         return totalFinal;
     }
-    
-    
-
-    //Mostrar datos debe ir en el main
-    /*public void imprimirFactura() {
-        for (Producto verProducto : this.detalleOrden) {
-
-            System.out.println("-" + verProducto.getNombreProducto() + "-" + verProducto.getPrecioProducto());
-
-        }
-    }*/
-    
-   
 }

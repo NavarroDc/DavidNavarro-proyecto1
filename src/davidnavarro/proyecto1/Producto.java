@@ -17,6 +17,16 @@ public class Producto {
         this.precioProducto = precioProducto;
         this.cantidadProducto = cantidadProducto;
     }
+    
+    public String mostrarProducto(){
+        String detalleProducto = "";
+        
+        detalleProducto += Integer.toString(this.getCantidadProducto()) + " X " 
+                + this.getNombreProducto() + ": "
+                +Double.toString(this.getPrecioProducto() * this.getCantidadProducto()) + "\n";
+        
+        return detalleProducto;
+    }
 
     public String getNombreProducto() {
         return nombreProducto;
