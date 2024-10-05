@@ -81,13 +81,10 @@ public class DavidNavarroProyecto1 {
                     //El detalle de la orden se asignó en la opción 1 
                     String nuevoNombreCliente = solicitarNombreCliente(leerDatosProducto);
                     int descuentoAplicado = solicitarDescuento(leerDatosProducto);
-                    double totalFinalProductos = ordenActual.totalFinal();
-
+                    
                     ordenActual.setFechaOrden(nuevaFecha);
                     ordenActual.setNombreCliente(nuevoNombreCliente);
                     ordenActual.setDescuento(descuentoAplicado);
-                    ordenActual.setTotal(totalFinalProductos);
-
                     break;
 
                 case 3:
@@ -288,6 +285,7 @@ public class DavidNavarroProyecto1 {
         for (Orden orden : ordenes) {
             System.out.println(orden.toString());
         }
+        System.out.println(ordenActual.toString());
     }
 
     public static boolean validarSoN(String eleccion) {

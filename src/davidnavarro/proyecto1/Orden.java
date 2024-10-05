@@ -99,11 +99,11 @@ public class Orden {
             
             factura += productoRecorrido.mostrarProducto();
         }
-        factura += "Cálculo del servicio (10%): " + this.calculoServicio();
-        factura += "Cálculo del IVA (13%): " + this.calculoIVA();
-        factura += "Descuento: " + this.getDescuento();
-        factura += "Subtotal: " + this.primerTotal();
-        factura += "Subtotal: " + this.getTotal();
+        factura += "Cálculo del servicio (10%): " + this.calculoServicio()+"\n";
+        factura += "Cálculo del IVA (13%): " + this.calculoIVA()+"\n";
+        factura += "Descuento: " + this.getDescuento()+"\n";
+        factura += "Subtotal: " + this.primerTotal()+"\n";
+        factura += "Total: " + this.totalFinal()+"\n";
         factura += "-----------------------------------------------------\n";
 
         
@@ -182,7 +182,8 @@ public class Orden {
 
     public double totalFinal() {
        
-        double totalFinal = this.primerTotal() - (this.primerTotal() * (this.descuento / 100));
+        double totalFinal = this.primerTotal() - (this.primerTotal() * ((this.descuento * 1.0) / 100.0));
+        System.out.println("");
         
 
         return totalFinal;
