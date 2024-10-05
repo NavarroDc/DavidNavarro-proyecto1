@@ -134,7 +134,7 @@ public class DavidNavarroProyecto1 {
     public static void preguntarNuevaOrden() {
         Scanner leerOrdenNueva = new Scanner(System.in);
         String nuevaOrden = "";
-        System.out.println("¿Desea agregar otra orden? S/N");
+        System.out.println("¿Desea agregar otra orden con otros productos? S/N");
         nuevaOrden = leerOrdenNueva.nextLine();
         nuevaOrden = nuevaOrden.toUpperCase();
         boolean eleccionValida = validarSoN(nuevaOrden);
