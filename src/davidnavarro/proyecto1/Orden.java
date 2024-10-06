@@ -83,13 +83,12 @@ public class Orden {
         this.total = total;
     }
 
-    
+    //Método toString() para mostrar el reporte final
     @Override
-    public String toString() {
-        //return "\n"+"\n"+"\n Reporte de la orden\n" + "\n Número de orden: " + numOrden + "\n Fecha de la orden: " + fechaOrden + "\n Nombre del cliente: " + nombreCliente + "\n Descuento: " + descuento + "\n Total de la compra: " + total;
-                  
+    public String toString() {       
         String factura = "";
         
+        //Se utilizan los getters para mostrar el número de orden, la fecha y el nombre del cliente
         factura += "-----------------------------------------------------\n";
         factura += "Número de orden: " + this.getNumOrden() + "\n";
         factura += "Fecha de la orden:   " + this.getFechaOrden() + "\n";
@@ -97,8 +96,9 @@ public class Orden {
         factura += "Productos:\n";
         for(Producto productoRecorrido : this.detalleOrden){
             
-            factura += productoRecorrido.mostrarProducto();
+            factura += productoRecorrido.mostrarProducto();//Se recorre detalleOrden y se muestran los datos por medio del método mostrarProducto()
         }
+        //Se usa un get para mostrar el descuento y se invoncan métodos para mostrar el calcúlo del impuesto del servicio, del IVA, el subtotal y el total final
         factura += "Cálculo del servicio (10%): " + this.calculoServicio()+"\n";
         factura += "Cálculo del IVA (13%): " + this.calculoIVA()+"\n";
         factura += "Descuento: " + this.getDescuento()+"\n";
@@ -106,7 +106,7 @@ public class Orden {
         factura += "Total: " + this.totalFinal()+"\n";
         factura += "-----------------------------------------------------\n";
 
-        
+        //Formato de reporte final
         /* ----------------------------------------------------
         
             Numero de orden: ORD002
@@ -126,66 +126,76 @@ public class Orden {
             Total = $3100 
             ----------------------------------------------------*/
     
-        return factura;
+        return factura; //El método retorna la factura
     }
     //------------------------------------------------------------------------------------------------------------------------------------------
 
+    //Método para crear el número de orden que se va a mostrar en el reporte final
     public void crearNumOrden(int numOrdenIngresado) {
+        //Se define el inicializa la variable que se va a utlizar en el método
         String codigoOrden = "ORD";
 
-        String codigoOrdenFinal = codigoOrden.concat(Integer.toString(numOrdenIngresado));
-
-        this.numOrden = codigoOrdenFinal;
+        String codigoOrdenFinal = codigoOrden.concat(Integer.toString(numOrdenIngresado));//Se crea el cógido de la orden final (ORD####) concatenando la string "ORD" y la el int que se pasa pasa por parámetro
+                                                                                          //Se realiza la conversión del número de orden ingresado para que sea una sola string
+        this.numOrden = codigoOrdenFinal; //Se le asigna el código final al tributo de orden
     }
 
+    //Método para agregar productos al array list de detalleOrden
     public void agregarProducto(Producto productoOrden) {
-        this.detalleOrden.add(productoOrden);
+        this.detalleOrden.add(productoOrden);//Se agrega un producto al array list detalleOrden
     }
     
+    //Método para obtener el resultado de la multiplicación precio * cantidad
     public double productoCantidadPrecio(){
-        
+        //Se define e inicializa la variable
         double precioCantidad = 0.0;
         
         for(Producto productoOrd : this.detalleOrden){
             
             precioCantidad = precioCantidad + (productoOrd.getPrecioProducto() * productoOrd.getCantidadProducto());
-        }
-        return precioCantidad;
+        }   //Se recorre el array list detalleOrden con un objeto de tipo producto para obtener el precio y la cantidad de los productos
+            //Se realiza la multiplicación de precio * cantidad
+            
+        return precioCantidad; //El método retorna el resultado de precio * cantidad
     }
 
+    //Calcula el impuesto del servicio (10%)
     public double calculoServicio() {
 
         double totalProducto = 0.0;
         
-            totalProducto = productoCantidadPrecio() * 0.10;
+            totalProducto = productoCantidadPrecio() * 0.10;//Se realiza la multiplicació del resultado del método de productoCantidadPrecio() * 0.10 (impuesto del servicio 10%)
             
-        return totalProducto;
+        return totalProducto; //Retorna el total del producto con el impuesto de servicio (10%)
     }
 
+    //Calcula el impuesto del IVA (13%)
     public double calculoIVA() {
 
         double totalProducto = 0.0;
         
-            totalProducto = productoCantidadPrecio() * 0.13;
+            totalProducto = productoCantidadPrecio() * 0.13;//Se realiza la multiplicació del resultado del método de productoCantidadPrecio() * 0.13 (impuesto del IVA 13%)
             
-        return totalProducto;
+        return totalProducto;//Retorna el total del producto con el impuesto del IVA (13%)
     }
-
+    
+    //Cálculo del subtotal
     public double primerTotal() {
         double montoTotalProductos = 0.0;
 
         for (Producto productoOrd : this.detalleOrden) {
-            montoTotalProductos = productoCantidadPrecio();
+            montoTotalProductos = productoCantidadPrecio();//Se recorre el array list detalleOrden y se captura el dato resultante del método productoCantidadPrecio() 
+                                                           //en la variable de tipo double montoTotalProductos
         }
-        return montoTotalProductos + this.calculoIVA() + this.calculoServicio();
+        return montoTotalProductos + this.calculoIVA() + this.calculoServicio();//Retorna la suma de los impuestos (10%) y (13%) al total del productoCantidadPrecio()
     }
-
+    
+    //Cálculo del total final
     public double totalFinal() {
        
-        double totalFinal = this.primerTotal() - (this.primerTotal() * ((this.descuento * 1.0) / 100.0));
+        double totalFinal = this.primerTotal() - (this.primerTotal() * ((this.descuento * 1.0) / 100.0)); //Se guarda en la variable totalFinal el resultado del subtotal menos el descuento
         System.out.println("");
         
-
-        return totalFinal;
+        return totalFinal; //El método retorna el total final
     }
 }
