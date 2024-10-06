@@ -259,30 +259,34 @@ public class DavidNavarroProyecto1 {
 
         return nuevaFecha;//El método retorna la fecha
     }
-
+    
+    //Se le pide al usuario que ingrese el nombre del cliente
     public static String solicitarNombreCliente(Scanner leerNombreCliente) {
         System.out.println("");
-        System.out.println("Ingrese el nombre del cliente");
-        String nuevoNombreCliente = leerNombreCliente.nextLine();
+        System.out.println("Ingrese el nombre del cliente");//Mensaje para que el usuario ingrese el nombre del cliente
+        String nuevoNombreCliente = leerNombreCliente.nextLine();//Se captura el dato 
         System.out.println("");
 
-        return nuevoNombreCliente;
+        return nuevoNombreCliente;//El método retorna el nombre del cliente
     }
-
+    
+    //Se le pide al usuario que ingrese el descuento
     public static int solicitarDescuento(Scanner leerDescuento) {
+        //Se definen e inicializan las variables del método
         boolean descuentoCorrecto = false;
         String nuevoDescuento;
         int descuentoAplicado = 0;
 
-        do {
-            System.out.println("Ingrese el cógido de descuento: DSC5 = 5% / DSC10 = 10% / DSC15 = 15% / 0 = No se aplica descuento");
-            String descuentoIngresado = leerDescuento.nextLine();
-            nuevoDescuento = descuentoIngresado.toUpperCase();
+        do {//Ciclo do.while para que se ingrese y se valide el descuento
+            System.out.println("Ingrese el cógido de descuento: DSC5 = 5% / DSC10 = 10% / DSC15 = 15% / 0 = No se aplica descuento");//Mensaje y especificaciones para que el usuario ingrese el descuento
+            String descuentoIngresado = leerDescuento.nextLine();//Se captura el dato
+            nuevoDescuento = descuentoIngresado.toUpperCase();//El dato ingresado se convierte en mayúsculas
 
-            if (nuevoDescuento.equals("DSC5")) {
+            //Se aplica la condición para que los códigos ingresados solo puedan ser DSC5, DSC10, DSC15, 0
+            if (nuevoDescuento.equals("DSC5")) {//En el caso de que el código sea uno de los anteriores descuentoCorrecto es verdadero y descuentoAplicado se iguala al valor que dependiento del código 0, 5, 10, 15
                 descuentoCorrecto = true;
                 descuentoAplicado = 5;
-            } else if (nuevoDescuento.equals("DSC10")) {
+            } else if (nuevoDescuento.equals("DSC10")) {//El método .equals() compara las string
                 descuentoCorrecto = true;
                 descuentoAplicado = 10;
             } else if (nuevoDescuento.equals("DSC15")) {
@@ -296,66 +300,70 @@ public class DavidNavarroProyecto1 {
                 System.out.println("----------------------------------------------------------------------");
                 System.out.println("No ingresó un descuento válido...");
                 System.out.println("----------------------------------------------------------------------");
-                System.out.println("");
+                System.out.println("");//Mensaje en caso de que el descuento sea inválido
             }
 
-        } while (!descuentoCorrecto);
+        } while (!descuentoCorrecto);//El ciclo se va a repetir mientra el descuento no sea correcto
 
-        return descuentoAplicado;
+        return descuentoAplicado;//El método retorna el descuento aplicado
     }
-
+    
+    //Se muestra el reporte final
     public static void mostrarDatos() {
 
-        for (Orden orden : ordenes) {
+        for (Orden orden : ordenes) {//Se recorre el array list de "Ordenes" e imprime el reporte final
             System.out.println(orden.toString());
         }
         System.out.println(ordenActual.toString());
     }
-
+    
+    //Método que valida si el usuario ingresó S o N
     public static boolean validarSoN(String eleccion) {
+        //Se definen e inicializan las variables del método
         boolean eleccionCorrecta = true;
 
-        if (!eleccion.equals("S") && !eleccion.equals("N")) {
-            eleccionCorrecta = false;
+        if (!eleccion.equals("S") && !eleccion.equals("N")) {//Condición que valida si el usuario ingresa algo diferente de S o N
+            eleccionCorrecta = false;//En el caso de que ingrese algo de S o N la elección no es correcta 
             System.out.println("----------------------------------------------------------------------");
             System.out.println("Debe ingresar solo S o N");
             System.out.println("----------------------------------------------------------------------");
-            System.out.println("");
+            System.out.println("");//Mensaje en caso de que el dato no sea correcto
 
         } else {
-            eleccionCorrecta = true;
+            eleccionCorrecta = true;//Si el dato es válido, eleccionCorrecta = verdadero
 
         }
-        return eleccionCorrecta;
+        return eleccionCorrecta;//El método retorna la elección del usuario
     }
 
     public static boolean ingresarOtroProducto(Scanner leerContinuar) {
+        //Se definen e inicializan las variables del método
         boolean respuestaValida = false;
         boolean continuar = false;
         String respuestaSN = "";
 
-        do {
+        do {//Ciclo do-while para que se ingrese y se valide la desición que crear otro producto
             System.out.println("");
             System.out.println("----------------------------------------------------------------------");
-            System.out.println("¿Desea ingresar otro producto? S/N");
-            String desicionAgregar = leerContinuar.nextLine();
-            respuestaSN = desicionAgregar.toUpperCase();
+            System.out.println("¿Desea ingresar otro producto? S/N");//Mensaje en caso de crear otro producto
+            String desicionAgregar = leerContinuar.nextLine();//Se captura el dato
+            respuestaSN = desicionAgregar.toUpperCase();//El dato se convierte en mayúsculas
 
-            respuestaValida = validarSoN(respuestaSN);
-        } while (!respuestaValida);
+            respuestaValida = validarSoN(respuestaSN);//RespuestaValida = al resultado booleano del método validarSoN(respuestaSN)
+        } while (!respuestaValida);//El ciclo se va a repetir mientras la respeusta no sea válida
 
-        if (respuestaValida) {
+        if (respuestaValida) {//Condición en caso de que la respuesta sea válida
 
             if (respuestaSN.equals("S")) {
-                continuar = true;
+                continuar = true;//Si la respuesta del usuario es igual a S, continuar es verdadero
             } else {
                 continuar = false;
-                volverMenuPrincipal = true;
+                volverMenuPrincipal = true;//De lo contrario, continuar es falso y volvería al menú
             }
         } else {
-            System.out.println("Solo se permite escribir S o N");
+            System.out.println("Solo se permite escribir S o N");//Mensaje en caso de que no ingrese S o N
         }
 
-        return continuar;
+        return continuar; //El método retorna el valor booleano continuar
     }
 }
