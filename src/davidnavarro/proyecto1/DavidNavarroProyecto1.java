@@ -142,110 +142,122 @@ public class DavidNavarroProyecto1 {
             }
         } while (!numeroValido);//El ciclo se va a repetir mientra el número no se válido
     }
-
+    
+    //Se le pregunta al usuario si quiere ingresar otra orden nueva
     public static void preguntarNuevaOrden() {
+        //Se definen e inicializan las variables del método
         Scanner leerOrdenNueva = new Scanner(System.in);
         String nuevaOrden = "";
-        System.out.println("¿Desea agregar otra orden con otros productos? S/N");
-        nuevaOrden = leerOrdenNueva.nextLine();
-        nuevaOrden = nuevaOrden.toUpperCase();
-        boolean eleccionValida = validarSoN(nuevaOrden);
+        
+        System.out.println("¿Desea agregar otra orden con otros productos? S/N");//Mensaje en caso de que el usuario quiera agregar otra orden con diferentes productos
+        nuevaOrden = leerOrdenNueva.nextLine();//Se captura el dato ingresado por el usuario
+        nuevaOrden = nuevaOrden.toUpperCase();//El dato ingresado por el usuario se convierte en mayúsculas
+        boolean eleccionValida = validarSoN(nuevaOrden);//Se define e inicializa la variable booleana eleccionValida que se iguala a lo que retorna el método validarSoN(nuevaOrden)
 
-        if (eleccionValida) {
+        if (eleccionValida) {//Condición en caso de que la elección sea válida
 
-            ordenes.add(ordenActual);
-            System.out.println("Tamaño");
-            System.out.println(ordenes.size());
+            ordenes.add(ordenActual);//Se añade al array list "ordenes" el objeto de tipo Orden "ordenActual" en ese momento
+            //Para pruebas:
+            //System.out.println("Tamaño");
+            //System.out.println(ordenes.size());
 
-            ordenActual = new Orden();
+            ordenActual = new Orden();//Después del proceso "ordenActual" se inicializa como nuevo objeto de Orden
         }
     }
-
+    
+    //Se le pide al usuario que ingrese el nombre del nuevo producto
     public static String solicitarNombreProducto(Scanner leerNombre) {
         System.out.println("");
         System.out.println("----------------------------------------------------------------------");
-        System.out.println("Ingrese el nombre del producto para crearlo");
-        String nuevoNombreProducto = leerNombre.nextLine();
+        System.out.println("Ingrese el nombre del producto para crearlo");//Mensaje para solicitar el nombre del producto
+        String nuevoNombreProducto = leerNombre.nextLine();//Se captura el dato uingresado por el usuario
         System.out.println("");
 
-        return nuevoNombreProducto;
+        return nuevoNombreProducto;//Retorna el nombre del producto ingresado
     }
-
+    
+    //Se le pide al usuario que ingrese el precio del nuevo producto
     public static double solicitarPrecioProducto(Scanner leerPrecio) {
+        //Se definen e inicializan las variables del método
         boolean precioCorrecto = false;
         double nuevoPrecioProducto = 0.0;
 
-        do {
-            try {
-                System.out.println("Ingrese el precio del producto");
-                String precioIngresado = leerPrecio.nextLine();
-                nuevoPrecioProducto = Double.parseDouble(precioIngresado);
+        do {//Ciclo do-while para que se ingrese y se valide el precio del producto
+            try {//Try-catch para las excepciones del producto
+                System.out.println("Ingrese el precio del producto");//Mensaje para ingresar precio
+                String precioIngresado = leerPrecio.nextLine();//Se captura el dato
+                nuevoPrecioProducto = Double.parseDouble(precioIngresado);//El dato capturado de tipo String se convierte a tipo double
 
-                precioCorrecto = true;
+                precioCorrecto = true;//Si no hay excepciones, el precio es correcto
 
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {//Atrapa la excepción en caso de que el usuario haya ingresado un dato diferente de un número
                 System.out.println("----------------------------------------------------------------------");
                 System.out.println("Debe ingresar un número para que el precio sea válido");
                 System.out.println("----------------------------------------------------------------------");
-                System.out.println("");
-
+                System.out.println("");//Mensaje en caso de que haya una exepción
             }
         } while (!precioCorrecto); //Ejecutarse mientras precioCorrecto esté NEGADO
 
-        return nuevoPrecioProducto;
+        return nuevoPrecioProducto;//El método retorna el precio del producto
     }
-
+    
+    //Se le pide al usuario que ingrese la cantidad del nuevo producto
     public static int solicitarCantidadProducto(Scanner leerCantidad) {
+        //Se definen e inicializan las variables del método
         boolean cantidadCorrecta = false;
         int nuevoCantidadProducto = 0;
 
-        do {
-            try {
+        do {//Ciclo do-while para que se ingrese y se valide la cantidad del producto
+            try {//Try-catch para las excepción de la cantidad
                 System.out.println("");
-                System.out.println("Ingrese la cantidad del producto");
-                String cantidadIngresada = leerCantidad.nextLine();
-                nuevoCantidadProducto = Integer.parseInt(cantidadIngresada);
+                System.out.println("Ingrese la cantidad del producto");//Mensaje para que el usuario ingrese la cantidad del producto
+                String cantidadIngresada = leerCantidad.nextLine();//Se captura el dato ingresado por el usuario y se guarda en la variable dde tipo String cantidadIngresada
+                nuevoCantidadProducto = Integer.parseInt(cantidadIngresada);//El dato ingresado se convierte a tipo int
 
-                cantidadCorrecta = true;
+                cantidadCorrecta = true;//Si no hay exepciones la cantidad es correcta
 
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {//Exepción en caso de que el usuario no haya ingresado un número
                 System.out.println("----------------------------------------------------------------------");
                 System.out.println("Debe ingresar un número para que la cantidad sea válida");
                 System.out.println("----------------------------------------------------------------------");
-                System.out.println("");
+                System.out.println("");//Mensaje en caso de haya una exepción
             }
         } while (!cantidadCorrecta); //Ejecutarse mientras precioCorrecto esté NEGADO
 
-        return nuevoCantidadProducto;
+        return nuevoCantidadProducto;//El método retorna la nueva cantidad del producto
     }
-
+    
+    //Se le pide al usuario que ingrese la fecha
     public static Date solicitarFecha(Scanner leerFecha) {
+        //Se define e inicializa la variable del método
         boolean fechaValida = false;
+        
         System.out.println("");
-        System.out.println("Ingrese la fecha en la que crea la orden (Debe escribir en este formato dd/MMM/aaa) Por ejemplo: 2/feb/2024...");
+        System.out.println("Ingrese la fecha en la que crea la orden (Debe escribir en este formato dd/MMM/aaa) Por ejemplo: 2/feb/2024...");//Mensaje y explicación para que el usuario ingrese la fecha con el formato esperado
 
-        Date nuevaFecha = null;
+        Date nuevaFecha = null;//Se define e inicializa la fecha en null
 
-        do {
-            String fechaIngresada = leerFecha.nextLine();
+        do {//Ciclo do-while para que se ingrese y se valide la fecha
+            String fechaIngresada = leerFecha.nextLine();//Se captura el dato
 
-            SimpleDateFormat fechaFormateada = new SimpleDateFormat("dd/MMM/yyyy", Locale.forLanguageTag("es-ES"));
-            fechaFormateada.setLenient(false);
+            SimpleDateFormat fechaFormateada = new SimpleDateFormat("dd/MMM/yyyy", Locale.forLanguageTag("es-ES"));//Se define e inicializa una fecha de tipo SimpleDateFormat para que se defina el formato esperato y que permita el ingreso de datos en idioma español
+            fechaFormateada.setLenient(false);//El método setLenient con el parámetro false permite que la fecha lance exepciones y se puede validar si hay algún error al momento de ingresar la fecha
 
-            try {
-                nuevaFecha = fechaFormateada.parse(fechaIngresada);
-                fechaValida = true;
-            } catch (ParseException errorParse) {
+            try {//try-catch para las exepciones de la fecha
+                nuevaFecha = fechaFormateada.parse(fechaIngresada);//Se hace la conversión de la fecha de String a Date
+                fechaValida = true;//Si no hay excepciones la fecha es válida
+            } catch (ParseException errorParse) {//Captura la exepción en caso de que la fecha se ingrese con un formato diferente al defenido
+                //Mensaje de error por defecto
                 //System.out.println(errorParse);
                 System.out.println("");
                 System.out.println("----------------------------------------------------------------------");
                 System.out.println("La fecha es inválida, debe seguir el formato dd/MMM/aaaa");
                 System.out.println("----------------------------------------------------------------------");
-                System.out.println("");
+                System.out.println("");//Mensanje en caso de que la fecha sea inválida
             }
-        } while (!fechaValida);
+        } while (!fechaValida);//El ciclo se va a repetir mientras la fecha no sea válida
 
-        return nuevaFecha;
+        return nuevaFecha;//El método retorna la fecha
     }
 
     public static String solicitarNombreCliente(Scanner leerNombreCliente) {
