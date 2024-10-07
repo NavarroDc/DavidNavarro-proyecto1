@@ -130,6 +130,17 @@ public class DavidNavarroProyecto1 {
                 System.out.println("----------------------------------------------------------------------");
                 System.out.println("Escriba el número de la orden");//Mensaje para que el usuario muestre la orden
                 int nuevoNumOrden = Integer.parseInt(lecturaDatos.nextLine());//La variable de tipo String ingresada por el usuario se convierte en int y se guarda en la variable nuevoNumOrden
+                
+                while(ordenExiste(nuevoNumOrden)){
+                    System.out.println("El número de orden " + Integer.toString(nuevoNumOrden) + " ya existe...");
+                    
+                    System.out.println("");
+                    System.out.println("----------------------------------------------------------------------");
+                    System.out.println("Escriba el número de la orden");//Mensaje para que el usuario muestre la orden
+                    nuevoNumOrden = Integer.parseInt(lecturaDatos.nextLine());//La variable de tipo String ingresada por el usuario se convierte en int y se guarda en la variable nuevoNumOrden
+                    
+                }
+                        
                 ordenActual.crearNumOrden(nuevoNumOrden);//Se invoca el método crearNumOrden(nuevoNumOrden) de la clase Orden con ayuda de la objeto de tipo Orden ordenActual
                 numeroValido = true;//numeroValido es verdadero en caso de que el usuario ingrese un número verdadero
 
@@ -141,6 +152,20 @@ public class DavidNavarroProyecto1 {
                 System.out.println("");//Mesaje en caso de que haya una exepción en el dato que ingresó el usuario
             }
         } while (!numeroValido);//El ciclo se va a repetir mientra el número no se válido
+    }
+    
+    //Método para verificar que el número de orden ya existe
+    public static boolean ordenExiste(int ordenVerificar){
+        String codigoOrden = "ORD";
+        codigoOrden = codigoOrden.concat(Integer.toString(ordenVerificar));
+        
+        for(Orden orden : ordenes){
+            
+            if(orden.getNumOrden().equals(codigoOrden)){
+                return true;
+            }
+        }
+        return ordenActual.getNumOrden().equals(codigoOrden);
     }
     
     //Se le pregunta al usuario si quiere ingresar otra orden nueva
